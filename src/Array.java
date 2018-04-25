@@ -26,4 +26,31 @@ public class Array {
     public boolean isEmpty(){
         return size==0;
     }
+
+    //向所有元素后添加一个元素
+    public void addLast(int e){
+        add(size,e);
+    }
+
+    //向所有元素前添加一个元素
+    public void addFist(int e){
+        add(0,e);
+    }
+
+    //在index的位置插入元素e，
+    // 首先需要把索引位置及之后的位置都向后移动一个位置
+    //从后往前移动元素
+    //把需要插入元素的位置让出来
+    //然后让数组大小+1
+
+    public void add(int index,int e){
+        if(size==data.length)
+            throw new IllegalArgumentException("AddLast failed.Array is full");
+        if(index<0 || index >size)
+            throw new IllegalArgumentException("AddLast failed.Index require >=0 and <=size");
+        for(int i = size-1;i>=index;i--)
+            data[i+1] = data[i];
+        data[index] = e;
+        size++;
+    }
 }
