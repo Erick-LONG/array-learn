@@ -53,4 +53,31 @@ public class Array {
         data[index] = e;
         size++;
     }
+
+    //获取index索引位置元素
+    int get(int index){
+        if(index < 0 || index >=size)
+            throw new IllegalArgumentException("Get failed.Index require >=0 and <=size");
+        return data[index];
+    }
+
+    void set(int index,int e){
+        if(index < 0 || index >=size)
+            throw new IllegalArgumentException("Get failed.Index require >=0 and <=size");
+        data[index] = e;
+    }
+
+    @Override //覆盖父类方法
+    public String toString(){
+        StringBuilder res = new StringBuilder();
+        res.append(String.format("Array:size=%d,capacity=%d\n",size,data.length));
+        res.append('[');
+        for(int i = 0;i<size;i++){
+            res.append(data[i]);
+        if(i != size-1)
+            res.append(", ");
+        }
+        res.append(']');
+        return res.toString();
+    }
 }
