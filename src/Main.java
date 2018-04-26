@@ -17,7 +17,7 @@ public class Main {
 //        for(int i =0;i<score.length; i++)
 //            System.out.println(score[i]);
 //    }
-        Array<Integer> arr = new Array<>(20);
+        Array<Integer> arr = new Array<>();
         for(int i=0;i<10;i++)
             arr.addLast(i);
         System.out.println(arr);

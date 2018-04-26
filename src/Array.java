@@ -44,10 +44,10 @@ public class Array<E> {
     //然后让数组大小+1
 
     public void add(int index,E e){
-        if(size==data.length)
-            throw new IllegalArgumentException("AddLast failed.Array is full");
         if(index<0 || index >size)
             throw new IllegalArgumentException("AddLast failed.Index require >=0 and <=size");
+        if(size==data.length)
+            resize(2*data.length);
         for(int i = size-1;i>=index;i--)
             data[i+1] = data[i];
         data[index] = e;
@@ -94,6 +94,8 @@ public class Array<E> {
             data[i-1]=data[i];
         size--;
         data[size]=null;
+        if(size==data.length/2)
+            resize(data.length/2);
         return ret;
     }
 
@@ -126,5 +128,12 @@ public class Array<E> {
         }
         res.append(']');
         return res.toString();
+    }
+
+    private void resize(int newCapacity){
+       E[] newData = (E[])new Object[newCapacity];
+       for(int i=0;i<size;i++)
+           newData[i]=data[i];
+       data = newData;
     }
 }
