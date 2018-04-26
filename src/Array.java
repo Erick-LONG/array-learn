@@ -1,10 +1,10 @@
-public class Array {
-    private int[] data;
+public class Array<E> {
+    private E[] data;
     private int size;
 
     //构造函数，传入数组容量capacity构造Array
     public Array(int capacity){
-        data = new int[capacity];
+        data = (E[])new Object[capacity];
         size = 0;
     }
     //无参数构造函数，默认数组的容量capacity=10
@@ -28,12 +28,12 @@ public class Array {
     }
 
     //向所有元素后添加一个元素
-    public void addLast(int e){
+    public void addLast(E e){
         add(size,e);
     }
 
     //向所有元素前添加一个元素
-    public void addFist(int e){
+    public void addFist(E e){
         add(0,e);
     }
 
@@ -43,7 +43,7 @@ public class Array {
     //把需要插入元素的位置让出来
     //然后让数组大小+1
 
-    public void add(int index,int e){
+    public void add(int index,E e){
         if(size==data.length)
             throw new IllegalArgumentException("AddLast failed.Array is full");
         if(index<0 || index >size)
@@ -55,16 +55,63 @@ public class Array {
     }
 
     //获取index索引位置元素
-    int get(int index){
+    public E get(int index){
         if(index < 0 || index >=size)
             throw new IllegalArgumentException("Get failed.Index require >=0 and <=size");
         return data[index];
     }
 
-    void set(int index,int e){
+    public void set(int index,E e){
         if(index < 0 || index >=size)
             throw new IllegalArgumentException("Get failed.Index require >=0 and <=size");
         data[index] = e;
+    }
+
+    //查找数组中是否有元素e
+    public boolean contains(E e){
+        for(int i=0;i<size;i++){
+            if(data[i].equals(e))
+                return true;
+        }
+        return false;
+    }
+
+    //查找数组中元素e所在索引，如果不存在元素e,则返回-1
+    public int find(E e){
+        for(int i=0;i<size;i++){
+            if(data[i].equals(e))
+                return i;
+        }
+        return -1;
+    }
+
+    //从数组中删除index位置的元素，返回删除的元素
+    public E remove(int index){
+        if(index < 0 || index >=size)
+            throw new IllegalArgumentException("Get failed.Index require >=0 and <=size");
+        E ret = data[index];
+        for(int i=index+1;i<size;i++)
+            data[i-1]=data[i];
+        size--;
+        data[size]=null;
+        return ret;
+    }
+
+    //从数组中删除第一个元素，返回删除元素
+    public E remveFirst(){
+        return remove(0);
+    }
+
+    //从数组中删除最后一个元素，返回被删除的元素
+    public E removeLast(){
+        return remove(size - 1);
+    }
+
+    //从数组中删除元素e
+    public void removeElement(E e){
+        int index = find(e);
+        if(index != -1)
+            remove(index);
     }
 
     @Override //覆盖父类方法
