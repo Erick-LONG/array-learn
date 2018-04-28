@@ -66,4 +66,68 @@ public class LinkedList<E> {
     public void addLast(E e){
         add(size,e);
     }
+
+    //获取链表的第index(0-based)个位置的元素
+    public E get(int index){
+        if(index<0 || index >size)
+            throw new IllegalArgumentException("Add failed ,Illegal index.");
+        Node cur = dummyhead.next;
+        for(int i=0;i<index;i++)
+            cur = cur.next;
+        return cur.e;
+    }
+
+    //获取链表第一个元素
+    public E getFirst(){
+        return get(0);
+    }
+
+    //获取链表最后一个元素
+    public E getLast(){
+        return get(size-1);
+    }
+
+    //修改链表的第index(0-based)个位置的元素为元素e
+    public void set(int index,E e){
+        if(index<0 || index >size)
+            throw new IllegalArgumentException("Set failed ,Illegal index.");
+
+        Node cur = dummyhead.next;
+        for(int i=0;i<index;i++)
+            cur = cur.next;
+        cur.e = e;
+    }
+
+    //查找链表中是否有元素e
+    public boolean contains(E e){
+        Node cur = dummyhead.next;
+        while (cur != null){
+            if(cur.e.equals(e))
+                return true;
+            cur =cur.next;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder res = new StringBuilder();
+        Node cur = dummyhead.next;
+        while (cur !=null){
+            res.append(cur + "->");
+            cur = cur.next;
+        }
+        res.append("NULL");
+        return res.toString();
+    }
+
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedListt = new LinkedList<>();
+        for(int i=0;i<5;i++){
+            linkedListt.addFirst(i);
+            System.out.println(linkedListt);
+        }
+        linkedListt.add(2,666);
+        System.out.println(linkedListt);
+    }
 }
