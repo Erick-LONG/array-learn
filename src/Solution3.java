@@ -2,14 +2,8 @@ public class Solution3 {
     public ListNode203 removeElements(ListNode203 head, int val) {
         if(head ==null)
             return null;
-        ListNode203 res = removeElements(head.next,val);
-        if(head.val ==val)
-            return res;
-        else {
-            head.next = res;
-            return head;
-        }
-
+        head.next = removeElements(head.next,val);
+        return head.val ==val ? head.next:head;
     }
 
     public static void main(String[] args){
