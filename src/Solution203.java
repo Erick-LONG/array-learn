@@ -15,6 +15,13 @@ public class Solution203 {
                 prev = prev.next;
         }
         return head;
+    }
 
+    public static void main(String[] args){
+        int[] nums = {1,2,6,3,4,5,6};
+        ListNode203 head = new ListNode203(nums);
+        System.out.println(head);
+        ListNode203 res = (new Solution203()).removeElements(head,6);
+        System.out.println(res);
     }
 }
