@@ -134,7 +134,76 @@ public class BST<E extends Comparable<E>> {
             if(cur.right !=null)
                 q.add(cur.right);
         }
+    }
 
+    //寻找二分搜索树最小元素
+    public E minium(){
+        if(size==0)
+            throw new IllegalArgumentException("BST is empty!");
+        return minium(root).e;
+    }
+
+    //返回以node为根的二分搜索树的最小值所在节点
+    private Node minium(Node node){
+        if(node.left ==null)
+            return node;
+        return minium(node.left);
+
+    }
+
+    //寻找二分搜索树最大元素
+    public E maxium(){
+        if(size==0)
+            throw new IllegalArgumentException("BST is empty!");
+        return maxium(root).e;
+    }
+
+    //返回以node为根的二分搜索树的最大值所在节点
+    private Node maxium(Node node){
+        if(node.right ==null)
+            return node;
+        return maxium(node.right);
+
+    }
+
+    //从二分搜索树中删除最小值所在节点，返回最小值
+    public E removeMin(){
+        E ret = minium();
+        removeMin(root);
+        return ret;
+    }
+
+    //删除掉以node为根的二分搜索树中最小的节点
+    //返回删除节点后新的二分搜索树的根
+    private Node removeMin(Node node){
+        if(node.left ==null){
+            Node rightNode = node.right;
+            node.right= null;
+            size--;
+            return rightNode;
+        }
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    //从二分搜索树中删除最大值所在节点，返回最大值
+    public E removeMax(){
+        E ret = maxium();
+        removeMax(root);
+        return ret;
+    }
+
+    //删除掉以node为根的二分搜索树中最小的节点
+    //返回删除节点后新的二分搜索树的根
+    private Node removeMax(Node node){
+        if(node.right ==null){
+            Node leftNode = node.left;
+            node.left= null;
+            size--;
+            return leftNode;
+        }
+        node.right = removeMax(node.right);
+        return node;
     }
 
     @Override
