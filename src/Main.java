@@ -104,6 +104,11 @@ public class Main {
             bst.add(num);
         bst.preOrder();
         System.out.println(bst);
+
+        bst.inOrder();//中序遍历会排序表
+        //System.out.println(bst);
+
+        bst.postOrder();//后序遍历会排序表
     }
 
 }
