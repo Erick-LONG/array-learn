@@ -1,5 +1,5 @@
 import java.util.TreeSet;
-class Solution {
+class Solution804 {
     public int uniqueMorseRepresentations(String[] words) {
         String[] codes = {".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
         TreeSet<String> set = new TreeSet<>();
