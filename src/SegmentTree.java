@@ -43,4 +43,28 @@ public class SegmentTree<E> {
     private int rightChild(int index){
         return 2 * index+2;
     }
+
+    //返回区间[queryL,queryR]的值
+    public E query(int queryL,int queryR){
+        return query(0,0,data.length-1,queryL,queryR);
+    }
+
+    //在以treeID为根的线段树中[l...r]范围里，搜索区间[queryL,queryR]的值
+    private E query(int treeIndex,int l,int r,int queryL,int queryR){
+        if (l ==queryL && r==queryR){
+            return tree[treeIndex];
+        }
+        int mid = l + (r-l) /2;
+        int leftTreeIndex = leftChild(treeIndex);
+        int rightTreeIndex = rightChild(treeIndex);
+
+        if (queryL>=mid +1)
+            return query(rightTreeIndex,mid+1,r,queryL,queryR);
+        else if (queryR<=mid)
+            return query(leftTreeIndex,l,mid,queryL,queryR);
+
+        E leftResult = query(leftTreeIndex,l,mid,queryL,mid);
+        E rightResult = query(rightTreeIndex,mid+1,r,mid+1,queryR);
+        return merger.merge(leftResult,rightResult);
+    }
 }
