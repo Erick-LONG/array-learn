@@ -8,7 +8,9 @@ public class NumArray303 {
             segmentTree = new SegmentTree<>(data,(a,b) -> a+b);
         }
     }
-
+    public void update(int index,int val){
+        segmentTree.set(index,val);
+    }
     public int sumRange(int i, int j) {
         if (segmentTree==null)
             throw new IllegalArgumentException("segment is null");
